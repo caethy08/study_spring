@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+     <bean id="mImpl" class="pack.controller.MessageImpl" scope="singleton"> <!-- messageimple이 생성자를 부르는데 매개변수가 없는 생성자가 없어서 에러 / scope="singleton"가 기본적으로 숨겨져있다(객체를 한번만 만듦), "prototype"는 매번 객체를 만든다-->
+     <!-- constructor injection -->
+     <constructor-arg index="0" type="java.lang.String"> <!-- index, type가 숨겨져 있다.  -->
+     	<value>안녕하세요</value>
+     </constructor-arg >
+     <constructor-arg index="1" type="String"> 
+     	<value>반가워요</value>
+     </constructor-arg>
+     <constructor-arg index="2" type="int" value="24">
+     	<!-- <value>24</value>  -->
+     </constructor-arg>
+   	  <constructor-arg index="3" type="pack.model.MyInfoInter" ref="my" />
+   	  
+   	  <!-- setter injection -->
+   	  <property name="spec">
+ 	  	<value>자바 개발 전문</value>
+ 	  </property>
+ 	  <property name="fileInter">
+ 	  	<ref bean="outFileInterImple"/>
+ 	  </property>
+     </bean>
+     
+     <bean id="myInfo" name="my,good" class="pack.model.MyInfo"/>
+     <bean id="outFileInterImple" class="pack.other.OutFileInterImple">
+    	<property name="filePath" value="c:/work2/message.txt" /> 
+    </bean>
+</beans>
