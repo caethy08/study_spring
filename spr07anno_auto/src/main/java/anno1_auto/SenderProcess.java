@@ -1,6 +1,7 @@
 package anno1_auto;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,12 @@ import org.springframework.stereotype.Service;
 @Service  //서비스를 위한 클래스 @Service("senderProcess") & @Scope("singleton")
 public class SenderProcess {
 	//@ Autowired : Bean의 자동 삽입을 위해 사용하는 어노테이션. (name이 아닌 type 으로 매핑)
-	@Autowired  //field injection: 간단하나 test가 불편. 주로 사용
-	private Sender sender;  
+//	@Autowired  //field injection: 간단하나 test가 불편. 주로 사용
+//	private Sender sender;  
 	
+	@Autowired // 샌더인터의 파생클래스를 매핑 //터압에 의한 매핑이므로 어디로 갈지 해결 못해 에러
+	@Qualifier("sender2") //autowired의 보조 어노테이션 복수일 경우 대상을 정해서 이동
+	private SenderInter senderInter;
 	
     /*	
 	@Autowired  //setter injection : 코드가 장황해짐
@@ -29,10 +33,10 @@ public class SenderProcess {
 	}
 	*/
 	
-	public Sender getSender() {
-		return sender;
-	}
-	public void dispDate() {
-		sender.show();
+//	public Sender getSender() {
+//		return senderInter;
+//	}
+	public void dispDate() { 
+		senderInter.show();
 	}
 }
