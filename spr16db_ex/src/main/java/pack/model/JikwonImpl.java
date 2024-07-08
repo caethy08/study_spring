@@ -27,7 +27,8 @@ public class JikwonImpl extends JdbcDaoSupport implements JikwonInter {
 	public List<JikwonDto> selectList(String gogek_name) throws DataAccessException {
 		RowMapper rowMapper = new JikwonMapper();
 		
-		String sql = "select jikwon_name, jikwon_jik, jikwon_gen from jikwon inner join gogek on jikwon.jikwon_no=gogek.gogek_damsano";
+		String sql = "select jikwon_name, jikwon_jik, jikwon_gen from jikwon inner join gogek on jikwon.jikwon_no=gogek.gogek_damsano where gogek_name="
+				 + "'" + gogek_name + "'";
 		/*
 		if (gogek_name != null) {
 			sql += "where gogek_name=" + gogek_name;

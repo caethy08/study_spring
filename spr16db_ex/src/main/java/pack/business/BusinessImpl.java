@@ -1,5 +1,6 @@
 package pack.business;
 
+import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,12 @@ public class BusinessImpl implements BusinessInter {
 		
 		scanner.close();
 		
+		List<JikwonDto> list =jikwonInter.selectList(gogek_name);
+		if(list.isEmpty()) {
+			System.out.println("로그인 실패");
+			System.exit(0);
+		}
+
 		for(JikwonDto j:jikwonInter.selectList(gogek_name)) {
 			System.out.println(j.getJikwon_name() + " " + j.getJikwon_jik() + j.getJikwon_gen());
 		}
