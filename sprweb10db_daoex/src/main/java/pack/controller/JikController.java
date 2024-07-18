@@ -17,7 +17,7 @@ public class JikController {
 	@Autowired
 	private JikDao jikDao;
 	
-	@GetMapping("testdb")
+	@GetMapping("list")
 	public String listProcess(@RequestParam(value="jikwon_jik")String jikwon_jik,
 			Model model) {
 		List<JikDto> list = jikDao.getJikList(jikwon_jik);

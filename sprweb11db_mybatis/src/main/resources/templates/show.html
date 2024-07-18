@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>상품목록(@MVC : Mybatis 방법)</h3>
+<table border="1">
+	<th:block th:if="${datas.size > 0}">
+		<!-- datas 리스트의 크기가 0보다 큰 경우(db에 상품이 있을 경우)만
+	 block안의 내용을 렌더링 -->
+	<tr>
+		<th>번호</th><th>코드</th><th>품명</th><th>수량</th><th>단가</th>
+	</tr>
+	<tr th:each="data, numStatus:${datas}">
+		<!--datas 리스트를 반복하며 각 항목을 data 변수에 할당하고, 
+	현재 반복 상태를 numStatus 변수에 할당. -->
+		<td th:text="${numStatus.index + 1}"></td>
+		<!-- 현재 항목의 인덱스를 1부터 시작하여 출력 -->
+		<td th:text="${data.code}">코드 출력</td>
+		<!-- data 객체의 code 속성을 출력 -->
+		<td>[[${data.sang}]]</td>
+		<!-- data 객체의 sang 속성을 출력 -->
+		<td>[[${data.su}]]</td>
+		<!-- #numbers.formatInteger(표시해야 할 값, 최소 자릿수) -->
+		<td>[[${#numbers.formatInteger(data.dan, 3, 'COMMA')}]]</td>
+		<!-- data 객체의 dan 속성을 3자리마다 콤마로 구분하여 출력 -->
+	</tr>
+	
+	<tr>
+		<td colspan="5">
+		<form th:action="@{/search}" method="get">
+		<!-- 검색 폼을 정의하며, 제출 시 search URL로 GET 요청을 보냄 -->
+		검색 상품명: <input type="text" name="searchValue">
+		<input type="submit" value="검색">
+		</form>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5" th:text="|건수 : ${datas.size}|">건수</td>
+		<!-- datas 리스트의 크기를 출력합니다. th:text 속성을 사용하여 동적 텍스트를 설정 -->
+	</tr>
+	</th:block>
+</table>
+</body>
+</html>

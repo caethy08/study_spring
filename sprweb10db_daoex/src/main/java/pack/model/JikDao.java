@@ -19,8 +19,8 @@ public class JikDao extends JdbcDaoSupport {
 	}
 	public List<JikDto> getJikList(String jikwon_jik){
 		String sql = "select * from jikwon where jikwon_jik=?";
-		/*
-		List<JikDto> list = getJdbcTemplate().query(sql, new RowMapper() {
+		
+		List<JikDto> list = getJdbcTemplate().query(sql, new Object[]{jikwon_jik}, new RowMapper() {//배열로 밀어놓기
 			@Override
 			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 				JikDto dto = new JikDto();
@@ -31,8 +31,9 @@ public class JikDao extends JdbcDaoSupport {
 				return dto;
 			}
 		});
-		*/
-	List<JikDto> list = getJdbcTemplate().query(sql, (ResultSet rs, int rowNum) -> {
+		
+		/*
+	List<JikDto> list = getJdbcTemplate().query(sql, new Object[]{jikwon_jik}, (ResultSet rs, int rowNum) -> {
 		JikDto dto = new JikDto();
 		dto.setJikwon_no(rs.getString("jikwon_no"));
 		dto.setJikwon_name(rs.getString("jikwon_name"));
@@ -40,6 +41,7 @@ public class JikDao extends JdbcDaoSupport {
 		dto.setJikwon_pay(rs.getString("jikwon_pay"));
 		return dto;
 	});
+	*/
 	return list;
 			
 	}

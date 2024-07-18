@@ -54,7 +54,32 @@ public class DataDao extends JdbcDaoSupport {
 		getJdbcTemplate().update(sql, params);
 	}
 	
-	//수정
+	//특정 레코드 읽기
+	public MemberDto getMemeber(String id) {
+		String sql = "select * from memberteb where id=?";
+		
+		MemberDto memberdto = (MemberDto)getJdbcTemplate().queryForObject(sql, new Object[] {id}, new RowMapper() {
+			@Override
+			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+				MemberDto dto = new MemberDto();
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setPasswd(rs.getString("passwd"));
+				dto.setReg_date(rs.getString("reg_date"));
+				return dto;
+			}
+		});
+		return memberdto;
+	}
 	
+	//수정
+	public void upDate(MemberBean bean) {
+		String sql = "update memberteb set name=?, passwd=? where id=?";
+		getJdbcTemplate().update(sql, new Object[] {bean.getName(), bean.getPasswd(), bean.getId()});
+	}
 	//삭제
+	public void delDate(String id) {
+		String sql = "delete from memberteb where id=?";
+		getJdbcTemplate().update(sql, new Object[] {id});
+	}
 }
