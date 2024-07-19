@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Sprweb10dbDaoex2Application {
+public class Sprweb15jpaSangpumApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Sprweb10dbDaoex2Application.class, args);
+		SpringApplication.run(Sprweb15jpaSangpumApplication.class, args);
 	}
 
 }
