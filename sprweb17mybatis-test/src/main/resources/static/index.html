@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="search" method="get">
+	부서명: <select name="searchBuser">
+		<option value="총무부">총무부</option>
+		<option value="영업부">영업부</option>
+		<option value="전산부">전산부</option>
+		<option value="관리부">관리부</option>
+	</select>
+	<input type="submit" value="확인">
+	평가등급: <input type="radio" name="searchValue" value="all" checked="checked">전체
+	<input type="radio" name="searchValue" value="a">a
+	<input type="radio" name="searchValue" value="b">b
+	<input type="radio" name="searchValue" value="c">c
+</form>
+<br>
+<table border="1">
+	<tr>
+		<th>사번</th><th>이름</th><th>직급</th><th>연봉</th><th>평가</th>
+	</tr>
+	<th:block th:if="${list.size > 0}">
+		<tr th:each="data:${list}">
+			<td th:text="${data.jikwon_no}">jikwon_no</td>
+			<td th:text="${data.jikwon_name}">jikwon_name</td>
+			<td th:text="${data.jikwon_jik}">jikwon_jik</td>
+			<td th:text="${data.jikwon_pay}">jikwon_pay</td>
+			<td th:text="${data.jikwon_rating}">jikwon_rating</td>
+		</tr>
+	</th:block>
+
+</table>
+</body>
+</html>

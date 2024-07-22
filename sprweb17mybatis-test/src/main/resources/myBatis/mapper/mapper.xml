@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pack.model.DataMapInterface">
+	<!-- 기본 -->
+	<select id="selectList">
+	
+	</select>
+	
+	<!-- 부서명으로 찾기 -->
+	<select id="selectBuser" parameterType="string" resultType="pack.model.JikwonDto">
+		select jikwon_no, jikwon_name, jikwon_jik, jikwon_pay, jikwon_rating from jikwon inner join buser on buser_num = buser_no where buser_name=#{buser_name}
+	</select>
+	<!-- 등급 찾기 -->
+	<select id="selectValue" parameterType="string" resultType="pack.model.JikwonDto">
+	resultType="pack.model.Jikwon">
+		select jikwon_no, jikwon_name, jikwon_jik, jikwon_pay, jikwon_rating
+		from jikwon
+		where buser_num = #{buser_num} and jikwon_rating = #{rating}
+	</select>
+</mapper>
